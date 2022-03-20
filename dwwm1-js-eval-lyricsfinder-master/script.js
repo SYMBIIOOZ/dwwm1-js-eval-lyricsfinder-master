@@ -24,17 +24,17 @@ formSearchSong.addEventListener("submit", function(event){
   const artistValue = formSearchSong.artist.value;
   const lyricsValue = formSearchSong.title.value;
   result.innerHTML = '';
-  if (artistValue === '' &&  lyricsValue === '') {
+  if (artistValue === '' || lyricsValue === '') {
     lyrics.style.display = 'none';
-    result.innerHTML = "Veuillez donner un nom et un titre !"
+    result.innerHTML = "<strong>Veuillez donner un nom et un titre !</strong>"
     loader.style.display = 'none';
   }else {
     submit.disabled = true;
     loader.style.display = 'initial';
     getLyrics(artistValue, lyricsValue);
+    formSearchSong.reset();
 
   }
-  //disable input submit 
   
   
 });
