@@ -24,10 +24,17 @@ formSearchSong.addEventListener("submit", function(event){
   const artistValue = formSearchSong.artist.value;
   const lyricsValue = formSearchSong.title.value;
   result.innerHTML = '';
+  if (artistValue === '' &&  lyricsValue === '') {
+    lyrics.style.display = 'none';
+    result.innerHTML = "Veuillez donner un nom et un titre !"
+    loader.style.display = 'none';
+  }else {
+    submit.disabled = true;
+    loader.style.display = 'initial';
+    getLyrics(artistValue, lyricsValue);
+
+  }
   //disable input submit 
-  submit.disabled = true;
-  loader.style.display = 'initial';
-  getLyrics(artistValue, lyricsValue);
   
   
 });
@@ -44,13 +51,15 @@ const SongRequest = 'https://api.lyrics.ovh'
       console.log(response.status);
       
       if(response.status === 404) {
-        
         result.innerHTML = "The music you are looking for can't be found...";
-      }else {
+        loader.style.display ='none';
+      
+      }else{
+
         const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
         result.innerHTML = `<h2>${artist} - ${songTitle}</h2>
         <span>${lyrics}</span>`;
-      };
+      }
       loader.style.display ='none';
       submit.disabled = false;
 
