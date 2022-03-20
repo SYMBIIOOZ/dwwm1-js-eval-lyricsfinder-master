@@ -5,7 +5,7 @@ const formSearchSong = document.getElementById('search-form');
 const loader = document.getElementById('loader');
 const search = document.getElementById('search');
 const result = document.getElementById('result');
-const more = document.getElementById('more');
+
 const lyrics = document.getElementById('lyrics');
 const submit = document.querySelector('input[type="submit"]');
 
@@ -35,16 +35,7 @@ formSearchSong.addEventListener("submit", function(event){
 
 const SongRequest = 'https://api.lyrics.ovh'
 
-// function getLyricsTest(artist, song){
-  //   var request = new XMLHttpRequest()
-  //   request.open('GET', 'URL')
-  //   request.send()
-  
-  //   request.onload = async function() {
-    //     var data = JSON.parse(this.response)
-    //     document.getElementByID('LyricsElement').InnerHTML = data
-    //   }
-    // }
+
     async function getLyrics(artist, songTitle) {
       const response = await fetch(`${SongRequest}/v1/${artist}/${songTitle}`);
       const data = await response.json();
@@ -68,24 +59,3 @@ const SongRequest = 'https://api.lyrics.ovh'
   
 }
 
-// result.addEventListener('click', e => {
-//   const clickedEl = e.target;
-//   if(clickedEl.tagName === 'BUTTON') {
-//     const artist = clickedEl.getAttribute('data-artist');
-//     const songTitle = clickedEl.getAttribute('data-songtitle');
-//     getLyrics(artist, songTitle);
-    
-//   }
-// });
-
-
-
-
-
-// await SongRequest
-// .then((resp) => resp.json())
-// .then(function(data) {
-// let authors = data.results;
-// return authors.map()
-// console.log(authors)
-// });
