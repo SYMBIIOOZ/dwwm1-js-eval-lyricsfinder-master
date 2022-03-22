@@ -20,7 +20,7 @@ loader.style.display = 'none';
 
 formSearchSong.addEventListener("submit", function(event){
   
-  event.preventDefault()
+  event.preventDefault();
   const artistValue = formSearchSong.artist.value;
   const lyricsValue = formSearchSong.title.value;
   result.innerHTML = '';
@@ -31,8 +31,10 @@ formSearchSong.addEventListener("submit", function(event){
   }else {
     submit.disabled = true;
     loader.style.display = 'initial';
-    getLyrics(artistValue, lyricsValue);
-    formSearchSong.reset();
+    getLyrics(artistValue, lyricsValue).then( () => {
+      formSearchSong.reset();
+
+    });
 
   }
   
@@ -45,6 +47,7 @@ const SongRequest = 'https://api.lyrics.ovh'
 
     async function getLyrics(artist, songTitle) {
       const response = await fetch(`${SongRequest}/v1/${artist}/${songTitle}`);
+      console.log(response);
       const data = await response.json();
       
       lyrics.style.display= "none";
